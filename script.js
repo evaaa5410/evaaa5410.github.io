@@ -1,6 +1,7 @@
 let inp = document.querySelector('.inp');
-let downM = document.querySelector('.dropdown-content')
-let btnGeo = document.querySelector('.geo');              
+let downM = document.querySelector('.dropdown-content');
+let btnGeo = document.querySelector('.geo');  
+let like = document.querySelector('#like');
 
 
 async function getCity() {                                  //получение данных с сервера
@@ -8,25 +9,25 @@ async function getCity() {                                  //получение
     let response = await fetch(url, { method: 'POST' });
     let result = await response.json();
     let ul = document.querySelector('.ul2');
-    let arr = []
+    let arr = [];
     for (const key in result) {
-            res = result[key].name
-            arr.push(res)
-            res2 = result[key].cities
+            res = result[key].name;
+            arr.push(res);
+            res2 = result[key].cities;
             for (const i in res2) {
-                cities = res2[i].name
-                arr.push(cities)
+                cities = res2[i].name;
+                arr.push(cities);
             }
     }
     arr.forEach(element => {                                //вставила элементы массива в список городов
         let li = document.createElement('li');
-        let a = document.createElement('a')
-        a.href = '#'
-        a.classList.add('lia')
-        li.classList.add('.li2')
+        let a = document.createElement('a');
+        a.href = '#';
+        a.classList.add('lia');
+        li.classList.add('.li2');
         ul.append(li);
         li.append(a);
-        a.innerHTML = element
+        a.innerHTML = element;
     });
 }
 getCity()
@@ -52,7 +53,7 @@ inp.addEventListener('keyup', (event) => {                  //отчистить
     let btnClose = document.querySelector('.close');
     btnClose.style.display = 'flex';
     if (event.target == btnClose) {
-        inp.value = ''
+        inp.value = '';
     }
 })
 
@@ -61,44 +62,43 @@ downM.addEventListener('click', (event) => {                //функция, м
     let li = event.target;
     let city =  document.querySelector('.city');
     let inp = document.querySelector('.inp');
-    city.textContent = li.textContent
-    inp.value = li.textContent
-    localStorage.setItem('city', inp.value)
-    if (li.tagName != 'LI') return
+    city.textContent = li.textContent;
+    inp.value = li.textContent;
+    localStorage.setItem('city', inp.value);
+    if (li.tagName != 'LI') return;
 })
 
 
 window.onload = () => {                                     //сохранение города
     let city = localStorage.getItem('city');
     let placeC = document.querySelector('.city');
-    placeC.textContent = city
+    placeC.textContent = city;
 }
 
 
 btnGeo.addEventListener('click', showInput);                
 function showInput() {                                      //функция, открывающая поисковик городов
-    let menu = document.querySelector('.dropdown-content')
+    let menu = document.querySelector('.dropdown-content');
     menu.classList.toggle("show");
 }
 
 
 let btnMenu = document.querySelector('#btnMenu');            //открыть моб меню
 btnMenu.addEventListener('click', () => {
-    let mobMenu = document.querySelector('#mobMenu')
+    let mobMenu = document.querySelector('#mobMenu');
     mobMenu.style.display = (mobMenu.style.display == 'none') ? 'flex' : 'none';
 })
 
 
-let like = document.querySelector('#like');
 like.addEventListener('click', (event) => {
     let img = document.querySelector('.img2');
-    let img2 = document.querySelector('.imgnone')
+    let img2 = document.querySelector('.imgnone');
     if (event.target == img) {
-        img.style.display = 'none'
-        img2.style.display = 'flex'
+        img.style.display = 'none';
+        img2.style.display = 'flex';
     } if (event.target == img2) {
-        img.style.display = 'flex'
-        img2.style.display = 'none'
+        img.style.display = 'flex';
+        img2.style.display = 'none';
     }
 })
 
